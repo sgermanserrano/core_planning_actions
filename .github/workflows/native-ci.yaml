@@ -39,17 +39,19 @@ jobs:
       run: |
         mkdir -p src_tmp/ && mv `find -maxdepth 1 -not -name . -not -name src_tmp -not -name $VCS_FILE` src_tmp/ && mv src_tmp/ src/
         vcs validate < $VCS_FILE
-        mkdir -p depends_ws/src
-        vcs import depends_ws/src/ < $VCS_FILE
+        vcs import src/ < $VCS_FILE
         rosdep update
         rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO
-        rosdep install -y --from-paths depends_ws/src --ignore-src --rosdistro $ROS_DISTRO
+        mkdir -p depends_ws/src
+        mv src/depends depends_ws/src
+        ls src
+        ls depends_ws/src
+        ls depends_ws/src/depends
 
     - name: Build depends repos
       run: |
         bash -c 'source /opt/ros/$ROS_DISTRO/setup.bash \
         cd depends_ws; colcon build; cd ..'
-
 
     - name: Build and test repo
       run: |
