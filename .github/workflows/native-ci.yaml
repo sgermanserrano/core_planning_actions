@@ -45,10 +45,16 @@ jobs:
         rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO
         rosdep install -y --from-paths depends_ws/src --ignore-src --rosdistro $ROS_DISTRO
 
+    - name: Build depends repos
+      run: |
+        bash -c 'source /opt/ros/$ROS_DISTRO/setup.bash \
+        cd depends_ws; colcon build; cd ..'
+
+
     - name: Build and test repo
       run: |
         bash -c 'source /opt/ros/$ROS_DISTRO/setup.bash \
-        cd depends_ws; colcon build; cd ..; source depends_ws/install/local_setup.bash \
+        source depends_ws/install/local_setup.bash \
         # We first build the entire workspace normally
         colcon build --cmake-args -DCMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage" -DCMAKE_C_FLAGS="${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage" -DCMAKE_BUILD_TYPE=Debug \
         # And then build the tests target. catkin (ROS1) packages add their tests to the tests target
