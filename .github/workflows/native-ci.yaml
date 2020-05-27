@@ -27,8 +27,11 @@ jobs:
     steps:
 
     - name: Test
-      run: echo "Hello!"
-
+      run: |
+        echo "Hello!"
+        ls -la
+        whoami
+        
     - name: Checkout repo
       uses: actions/checkout@v2
 
