@@ -42,10 +42,22 @@ jobs:
         vcs import src/ < $VCS_FILE
         rosdep update
         rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO
+        pwd
+        echo "mkdir"
+        echo " "
         mkdir -p depends_ws/src
+        ls
+        echo "mv"
+        echo " "
         mv src/depends depends_ws/src
+        echo "ls src"
+        echo " "
         ls src
+        echo "ls depends_ws/src"
+        echo " "
         ls depends_ws/src
+        echo "ls depends_ws/src/depends"
+        echo " "
         ls depends_ws/src/depends
 
     - name: Build depends repos
