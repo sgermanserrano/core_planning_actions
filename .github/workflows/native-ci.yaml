@@ -22,12 +22,13 @@ jobs:
       image: autoware/autoware:bleedingedge-melodic-base
       env:
         VCS_FILE: build_depends.repos
+      options: --user autoware
 
     steps:
 
     - name: Test
       run: echo "Hello!"
-      
+
     - name: Checkout repo
       uses: actions/checkout@v2
 
