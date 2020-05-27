@@ -65,7 +65,7 @@ jobs:
         colcon test-result --verbose; \
         lcov --directory build --capture --output-file lcov.test; \
         lcov -a lcov.base -a lcov.test -o lcov.total; \
-        lcov -r lcov.total '*/tests/*' '*/test/*' '*/build/*' '*/devel/*' '*/install/*' '*/log/*' '/usr/*' '/opt/*' '/tmp/*' '*/CMakeCCompilerId.c' '*/CMakeCXXCompilerId.cpp' -o lcov.total.filtered; \
+        lcov -r lcov.total '*/tests/*' '*/test/*' '*/build/*' '*/devel/*' '*/install/*' '*/log/*' '*/usr/*' '*/opt/*' '/tmp/*' '*/CMakeCCompilerId.c' '*/CMakeCXXCompilerId.cpp' '*/depends_ws/*' -o lcov.total.filtered; \
         genhtml -p "$PWD" --legend --demangle-cpp lcov.total.filtered -o coverage; \
         tar -czvf coverage.tar.gz coverage'
 
