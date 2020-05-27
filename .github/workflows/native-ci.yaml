@@ -18,11 +18,11 @@ jobs:
         os: [ubuntu-latest] #[ubuntu-latest, self-hosted]
       fail-fast: false
 
-    #container:
-    #  image: autoware/autoware:bleedingedge-melodic-base
-    #  env:
-    #    VCS_FILE: build_depends.repos
-    #  options: --user autoware
+    container:
+      image: autoware/autoware:bleedingedge-melodic-base
+      env:
+        VCS_FILE: build_depends.repos
+      options: --user 1001
 
     steps:
 
