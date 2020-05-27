@@ -26,10 +26,6 @@ jobs:
 
     steps:
 
-    - name: Test
-      run: |
-        echo "Hello!"
-
     - name: Checkout repo
       uses: actions/checkout@v2
 
@@ -46,29 +42,27 @@ jobs:
         rosdep update
         rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO
 
+    - name: Build and test repo
+      run: |
+        source /opt/ros/$ROS_DISTRO/setup.bash
+    # We first build the entire workspace normally
+        colcon build --cmake-args -DCMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage" -DCMAKE_C_FLAGS="${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage" -DCMAKE_BUILD_TYPE=Debug
+    # And then build the tests target. catkin (ROS1) packages add their tests to the tests target
+    # which is not the standard target for CMake projects. We need to trigger the tests target so that
+    # tests are built and any fixtures are set up.
+        colcon build --cmake-target tests --cmake-args -DCMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage" -DCMAKE_C_FLAGS="${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage" -DCMAKE_BUILD_TYPE=Debug
+        lcov --initial --directory build --capture --output-file lcov.base
+        colcon test
+        colcon test-result --verbose
+        lcov --directory build --capture --output-file lcov.test
+        lcov -a lcov.base -a lcov.test -o lcov.total
+        lcov -r lcov.total '*/tests/*' '*/test/*' '*/build/*' '*/devel/*' '*/install/*' '*/log/*' '/usr/*' '/opt/*' '/tmp/*' '*/CMakeCCompilerId.c' '*/CMakeCXXCompilerId.cpp' -o lcov.total.filtered
+        genhtml -p "$PWD" --legend --demangle-cpp lcov.total.filtered -o coverage
+        tar -czvf coverage.tar.gz coverage
 
-    #- name: Build and test repo
-    #  source /opt/ros/melodic/setup.bash
-    #  mkdir -p autoware.ai/src
-    #  cd autoware.ai
-    #  wget -O autoware.ai.repos "https://gitlab.com/autowarefoundation/autoware.ai/autoware/raw/master/autoware.ai.repos?inline=false"
-    #  vcs import src < autoware.ai.repos
-    #  rosdep update
-    #  rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO
-    #  colcon build --cmake-args -DCMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage" -DCMAKE_C_FLAGS="${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage" -DCMAKE_BUILD_TYPE=Debug
-    #  colcon build --cmake-target tests --cmake-args -DCMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage" -DCMAKE_C_FLAGS="${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage" -DCMAKE_BUILD_TYPE=Debug
-    #  lcov --initial --directory build --capture --output-file lcov.base
-    #  colcon test
-    #  colcon test-result --verbose
-    #  lcov --directory build --capture --output-file lcov.test
-    #  lcov -a lcov.base -a lcov.test -o lcov.total
-    #  lcov -r lcov.total '*/tests/*' '*/test/*' '*/build/*' '*/devel/*' '*/install/*' '*/log/*' '/usr/*' '/opt/*' '/tmp/*' '*/CMakeCCompilerId.c' '*/CMakeCXXCompilerId.cpp' -o lcov.total.filtered
-    #  genhtml -p "$PWD" --legend --demangle-cpp lcov.total.filtered -o coverage_master
-    #  tar -czvf coverage.tar.gz coverage_master
-
-    #- name: Upload Logs
-    #  uses: actions/upload-artifact@v1
-    #  with:
-    #    name: coverage.tar.gz
-    #    path: autoware.ai/coverage.tar.gz
-    #  if: always()
+    - name: Upload Logs
+      uses: actions/upload-artifact@v1
+      with:
+        name: coverage.tar.gz
+        path: autoware.ai/coverage.tar.gz
+      if: always()
