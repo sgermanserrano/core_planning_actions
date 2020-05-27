@@ -25,7 +25,11 @@ jobs:
 
     steps:
 
-    - uses: actions/checkout@v2
+    - name: Test
+      run: echo "Hello!"
+      
+    - name: Checkout repo
+      uses: actions/checkout@v2
 
     #- name: Setup ROS
     #  uses: ros-tooling/setup-ros@0.0.18
