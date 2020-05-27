@@ -29,8 +29,6 @@ jobs:
     - name: Test
       run: |
         echo "Hello!"
-        ls -la
-        whoami
 
     - name: Checkout repo
       uses: actions/checkout@v2
