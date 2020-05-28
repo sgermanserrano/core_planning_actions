@@ -57,6 +57,7 @@ jobs:
 
     - name: Build repo
       run: |
+        echo $AUTOWARE_SYSROOT
         bash -c 'echo $AUTOWARE_SYSROOT; source $AUTOWARE_SYSROOT/opt/ros/${ROS_DISTRO}/setup.bash; \
         colcon build
             --merge-install
