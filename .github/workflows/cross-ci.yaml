@@ -61,5 +61,6 @@ jobs:
           -DCMAKE_SYSTEM_PROCESSOR=$AUTOWARE_TARGET_ARCH \
           -DCMAKE_PREFIX_PATH="${{ github.workspace }};$AUTOWARE_SYSROOT/opt/ros/$ROS_DISTRO" \
           -DCMAKE_FIND_ROOT_PATH=${{ github.workspace }} \
+          -DCMAKE_MODULE_PATH=${{ github.workspace }}/install \
           --packages-up-to amathutils_lib'
         ls
