@@ -46,17 +46,14 @@ jobs:
     #  uses: ros-tooling/setup-ros@0.0.18
     #  with:
     #    required-ros-distributions: melodic
-
-    - name: Prepare repo
+    #    
+    - name: Build repo
       run: |
         mkdir -p src_tmp/ && mv `find -maxdepth 1 -not -name . -not -name src_tmp -not -name $VCS_FILE` src_tmp/ && mv src_tmp/ src/
         sudo apt-get update -qq && sudo apt-get install -y python3-vcstool git wget
         wget https://gitlab.com/autowarefoundation/autoware.ai/docker/raw/master/crossbuild/cross_toolchain.cmake
         vcs validate < $VCS_FILE
         vcs import src/ < $VCS_FILE
-
-    - name: Build repo
-      run: |
         ls $GITHUB_WORKSPACE
         echo $AUTOWARE_TOOLCHAIN_FILE_PATH
         bash -c 'echo $AUTOWARE_SYSROOT; source $AUTOWARE_SYSROOT/opt/ros/${ROS_DISTRO}/setup.bash; \
