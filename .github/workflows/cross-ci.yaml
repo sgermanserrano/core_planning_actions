@@ -54,7 +54,7 @@ jobs:
 
     - name: Build repo
       run: |
-        bash -c 'source ${AUTOWARE_SYSROOT}/opt/ros/${ROS_DISTRO}/setup.bash; \
+        bash -c 'echo $AUTOWARE_SYSROOT; source $AUTOWARE_SYSROOT/opt/ros/${ROS_DISTRO}/setup.bash; \
         colcon build
             --merge-install
             --cmake-args
