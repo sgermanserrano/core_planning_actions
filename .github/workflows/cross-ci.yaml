@@ -24,7 +24,7 @@ jobs:
       AUTOWARE_CROSS_TARGET_PLATFORM: generic-aarch64
       AUTOWARE_TARGET_ARCH: aarch64
       AUTOWARE_TOOLCHAIN_FILE_PATH: cross_toolchain.cmake
-      AUTOWARE_SYSROOT: /sysroot/$AUTOWARE_CROSS_TARGET_PLATFORM
+      AUTOWARE_SYSROOT: /sysroot/generic-aarch64
 
     container:
       image: autoware/build:generic-aarch64-melodic-bleedingedge
