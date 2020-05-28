@@ -32,7 +32,7 @@ jobs:
         VCS_FILE: build_depends.repos
         ROS_DISTRO: melodic
         AUTOWARE_TARGET_ARCH: aarch64
-        AUTOWARE_TOOLCHAIN_FILE_PATH: cross_toolchain.cmake
+        AUTOWARE_TOOLCHAIN_FILE_PATH: $GITHUB_WORKSPACE/cross_toolchain.cmake
         AUTOWARE_CROSS_TARGET_PLATFORM: generic-aarch64
         AUTOWARE_SYSROOT: /sysroot/generic-aarch64
       # options: --user 1001
@@ -57,7 +57,7 @@ jobs:
 
     - name: Build repo
       run: |
-        echo $AUTOWARE_SYSROOT
+        ls $GITHUB_WORKSPACE
         bash -c 'echo $AUTOWARE_SYSROOT; source $AUTOWARE_SYSROOT/opt/ros/${ROS_DISTRO}/setup.bash; \
         colcon build --merge-install \
           --cmake-args \
