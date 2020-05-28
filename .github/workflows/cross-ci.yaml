@@ -61,5 +61,5 @@ jobs:
           -DCMAKE_SYSTEM_PROCESSOR=$AUTOWARE_TARGET_ARCH \
           -DCMAKE_PREFIX_PATH=${{ github.workspace }}/install/ \
           -DCMAKE_FIND_ROOT_PATH=${{ github.workspace }}/install/ \
-          --packages-up-to amathutils_lib'
-        ls
+          --packages-up-to autoware_build_flags'
+        ls ${{ github.workspace }}/install/
