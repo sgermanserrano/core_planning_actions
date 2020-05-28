@@ -32,7 +32,7 @@ jobs:
         AUTOWARE_TOOLCHAIN_FILE_PATH: cross_toolchain.cmake
         AUTOWARE_CROSS_TARGET_PLATFORM: generic-aarch64
         AUTOWARE_SYSROOT: /sysroot/${AUTOWARE_CROSS_TARGET_PLATFORM}
-      options: --user 1001
+      # options: --user 1001
 
     steps:
 
