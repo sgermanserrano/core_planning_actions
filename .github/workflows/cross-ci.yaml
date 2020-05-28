@@ -24,12 +24,13 @@ jobs:
       AUTOWARE_CROSS_TARGET_PLATFORM: generic-aarch64
 
     container:
-      image: autoware/build:$AUTOWARE_CROSS_TARGET_PLATFORM-melodic-bleedingedge
+      image: autoware/build:generic-aarch64-melodic-bleedingedge
       env:
         VCS_FILE: build_depends.repos
         ROS_DISTRO: melodic
         AUTOWARE_TARGET_ARCH: aarch64
         AUTOWARE_TOOLCHAIN_FILE_PATH: cross_toolchain.cmake
+        AUTOWARE_CROSS_TARGET_PLATFORM: generic-aarch64
         AUTOWARE_SYSROOT: /sysroot/${AUTOWARE_CROSS_TARGET_PLATFORM}
       options: --user 1001
 
