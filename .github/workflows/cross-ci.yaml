@@ -24,7 +24,7 @@ jobs:
       AUTOWARE_CROSS_TARGET_PLATFORM: generic-aarch64
       AUTOWARE_TARGET_ARCH: aarch64
       AUTOWARE_TOOLCHAIN_FILE_PATH: ${{ github.workspace }}/cross_toolchain.cmake
-      AUTOWARE_SYSROOT: /sysroot/generic-aarch64
+      AUTOWARE_SYSROOT: /sysroot/${{ AUTOWARE_CROSS_TARGET_PLATFORM }}
 
     container:
       image: autoware/build:generic-aarch64-melodic-bleedingedge
@@ -32,9 +32,9 @@ jobs:
         VCS_FILE: build_depends.repos
         ROS_DISTRO: melodic
         AUTOWARE_TARGET_ARCH: aarch64
-        AUTOWARE_TOOLCHAIN_FILE_PATH: $GITHUB_WORKSPACE/cross_toolchain.cmake
+        AUTOWARE_TOOLCHAIN_FILE_PATH: ${{ github.workspace }}/cross_toolchain.cmake
         AUTOWARE_CROSS_TARGET_PLATFORM: generic-aarch64
-        AUTOWARE_SYSROOT: /sysroot/generic-aarch64
+        AUTOWARE_SYSROOT: /sysroot/${{ AUTOWARE_CROSS_TARGET_PLATFORM }}
       # options: --user 1001
 
     steps:
