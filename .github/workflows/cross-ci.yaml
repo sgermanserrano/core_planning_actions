@@ -59,10 +59,9 @@ jobs:
       run: |
         echo $AUTOWARE_SYSROOT
         bash -c 'echo $AUTOWARE_SYSROOT; source $AUTOWARE_SYSROOT/opt/ros/${ROS_DISTRO}/setup.bash; \
-        colcon build
-            --merge-install
-            --cmake-args
-            -DCMAKE_TOOLCHAIN_FILE=${AUTOWARE_TOOLCHAIN_FILE_PATH}
-            -DCMAKE_SYSTEM_PROCESSOR=${AUTOWARE_TARGET_ARCH}
-            -DCMAKE_PREFIX_PATH="install;${AUTOWARE_SYSROOT}/opt/ros/${ROS_DISTRO}"
-            -DCMAKE_FIND_ROOT_PATH=install'
+        colcon build --merge-install \
+          --cmake-args \
+          -DCMAKE_TOOLCHAIN_FILE=${AUTOWARE_TOOLCHAIN_FILE_PATH} \
+          -DCMAKE_SYSTEM_PROCESSOR=${AUTOWARE_TARGET_ARCH} \
+          -DCMAKE_PREFIX_PATH="install;${AUTOWARE_SYSROOT}/opt/ros/${ROS_DISTRO}" \
+          -DCMAKE_FIND_ROOT_PATH=install'
