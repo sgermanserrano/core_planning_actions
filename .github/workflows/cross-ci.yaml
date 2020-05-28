@@ -51,13 +51,10 @@ jobs:
         wget https://gitlab.com/autowarefoundation/autoware.ai/docker/raw/master/crossbuild/cross_toolchain.cmake
         vcs validate < $VCS_FILE
         vcs import src/ < $VCS_FILE
-        rosdep update
-        rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO
 
     - name: Build repo
       run: |
         bash -c 'source ${AUTOWARE_SYSROOT}/opt/ros/${ROS_DISTRO}/setup.bash; \
-        source depends_ws/install/local_setup.bash; \
         colcon build
             --merge-install
             --cmake-args
