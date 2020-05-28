@@ -35,7 +35,7 @@ jobs:
         AUTOWARE_TOOLCHAIN_FILE_PATH: ${{ github.workspace }}/cross_toolchain.cmake
         AUTOWARE_CROSS_TARGET_PLATFORM: generic-aarch64
         AUTOWARE_SYSROOT: /sysroot/generic-aarch64
-       options: --workdir / #--user 1001
+       #options: --workdir / #--user 1001
 
     steps:
 
