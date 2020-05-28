@@ -54,10 +54,10 @@ jobs:
         wget https://gitlab.com/autowarefoundation/autoware.ai/docker/raw/master/crossbuild/cross_toolchain.cmake
         vcs validate < $VCS_FILE
         vcs import src/ < $VCS_FILE
-        bash -c 'python --version; source /sysroot/generic-aarch64/opt/ros/melodic/setup.bash; \
+        bash -c 'source $AUTOWARE_SYSROOT/opt/ros/${ROS_DISTRO}/setup.bash; \
         colcon build --merge-install \
           --cmake-args \
-          -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/cross_toolchain.cmake \
-          -DCMAKE_SYSTEM_PROCESSOR=aarch64 \
-          -DCMAKE_PREFIX_PATH="${{ github.workspace }}/install;/sysroot/generic-aarch64/opt/ros/melodic" \
-          -DCMAKE_FIND_ROOT_PATH=${{ github.workspace }}/install'
+          -DCMAKE_TOOLCHAIN_FILE="$AUTOWARE_TOOLCHAIN_FILE_PATH" \
+          -DCMAKE_SYSTEM_PROCESSOR="$AUTOWARE_TARGET_ARCH" \
+          -DCMAKE_PREFIX_PATH="${{ github.workspace }}/install;$AUTOWARE_SYSROOT/opt/ros/$ROS_DISTRO" \
+          -DCMAKE_FIND_ROOT_PATH="${{ github.workspace }}/install"'
