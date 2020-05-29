@@ -48,7 +48,7 @@ jobs:
         echo askdjasd
         cd core_planning_actions.git
         ls
-        git remote set-url --push origin git@github.com:sgermanserrano/core_planning_mirror.git
+        git remote set-url --push origin https://github.com/sgermanserrano/core_planning_mirror.git
         echo ajshdasdj;
         git fetch -p origin
         echo ajsdjahf
