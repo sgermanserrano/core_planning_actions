@@ -44,7 +44,7 @@ jobs:
 
     - name: Mirror repo
       run: |
-        git clone --mirror git@github.com:sgermanserrano/core_planning_actions.git
+        git clone --mirror https://github.com/sgermanserrano/core_planning_actions.git
         cd core_planning_actions.git
         git remote set-url --push origin git@github.com:sgermanserrano/core_planning_mirror.git
         git fetch -p origin
