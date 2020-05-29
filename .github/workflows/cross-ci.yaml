@@ -63,7 +63,7 @@ jobs:
           -DCMAKE_FIND_ROOT_PATH=${{ github.workspace }}/install/ \
           --packages-up-to autoware_build_flags'
         pwd
-        echo "--------------"
+        echo "=============="
         ls
         echo "--------------"
         ls ${{ github.workspace }}
