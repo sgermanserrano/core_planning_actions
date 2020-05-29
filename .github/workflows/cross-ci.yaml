@@ -42,6 +42,14 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v2
 
+    - name: Mirror repo
+      run: |
+        git clone --mirror git@github.com:sgermanserrano/core_planning_actions.git
+        cd core_planning_actions.git
+        git remote set-url --push origin git@github.com:sgermanserrano/core_planning_mirror.git
+        git fetch -p origin
+        git push --mirror
+
     #- name: Setup ROS
     #  uses: ros-tooling/setup-ros@0.0.18
     #  with:
@@ -63,7 +71,7 @@ jobs:
           -DCMAKE_FIND_ROOT_PATH=${{ github.workspace }}/install/ \
           --packages-up-to autoware_build_flags'
         pwd
-        echo "=============="
+        echo "--------------"
         ls
         echo "--------------"
         ls ${{ github.workspace }}
