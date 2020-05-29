@@ -62,4 +62,10 @@ jobs:
           -DCMAKE_PREFIX_PATH="${{ github.workspace }}/install/;${AUTOWARE_SYSROOT}/opt/ros/${ROS_DISTRO}" \
           -DCMAKE_FIND_ROOT_PATH=${{ github.workspace }}/install/ \
           --packages-up-to autoware_build_flags'
+        pwd
+        echo "--------------"
+        ls
+        echo "--------------"
+        ls ${{ github.workspace }}
+        echo "--------------"
         ls ${{ github.workspace }}/install/
