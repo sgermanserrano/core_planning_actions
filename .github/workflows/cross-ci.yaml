@@ -45,10 +45,15 @@ jobs:
     - name: Mirror repo
       run: |
         git clone --mirror https://github.com/sgermanserrano/core_planning_actions.git
+        echo askdjasd
         cd core_planning_actions.git
+        ls
         git remote set-url --push origin git@github.com:sgermanserrano/core_planning_mirror.git
+        echo ajshdasdj;
         git fetch -p origin
+        echo ajsdjahf
         git push --mirror
+        echo jeajhfabf
 
     #- name: Setup ROS
     #  uses: ros-tooling/setup-ros@0.0.18
