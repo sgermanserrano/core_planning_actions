@@ -74,9 +74,9 @@ jobs:
           --cmake-args \
           -DCMAKE_TOOLCHAIN_FILE=$AUTOWARE_TOOLCHAIN_FILE_PATH \
           -DCMAKE_SYSTEM_PROCESSOR=$AUTOWARE_TARGET_ARCH \
-          -DCMAKE_PREFIX_PATH="${{ github.workspace }}/install/;${AUTOWARE_SYSROOT}/opt/ros/${ROS_DISTRO}" \
+          -DCMAKE_PREFIX_PATH="$(pwd)/install/;${AUTOWARE_SYSROOT}/opt/ros/${ROS_DISTRO}" \
           -DCMAKE_FIND_ROOT_PATH=${{ github.workspace }}/install/ \
-          --packages-up-to autoware_build_flags'
+          --packages-up-to autoware_build_flags; echo `ls`; echo `ls (pwd)/install`'
         pwd
         echo "--------------"
         ls
