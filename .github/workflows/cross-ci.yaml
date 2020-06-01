@@ -10,6 +10,36 @@ on:
 
 jobs:
 
+  repo-mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: SSH Key setup
+        uses: webfactory/ssh-agent@v0.2.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Push to mirror
+        run: |
+          git clone --mirror git@github.com:sgermanserrano/core_planning_actions.git
+          cd core_planning_actions.git
+          git remote set-url --push origin git@github.com:sgermanserrano/core_planning_mirror.git
+          git fetch -p origin
+          git push --mirror
+
+
+
+      #- uses: wearerequired/git-mirror-action@v1
+      #  env:
+      #    SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      #  with:
+      #    source-repo: 'git@github.com:sgermanserrano/core_planning_actions.git'
+      #    destination-repo: 'git@github.com:sgermanserrano/core_planning_mirror.git'
+
+
   build-melodic:
 
     runs-on: ${{ matrix.os }}
