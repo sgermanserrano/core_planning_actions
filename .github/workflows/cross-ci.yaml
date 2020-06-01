@@ -76,7 +76,7 @@ jobs:
           -DCMAKE_SYSTEM_PROCESSOR=$AUTOWARE_TARGET_ARCH \
           -DCMAKE_PREFIX_PATH="$(pwd)/install/;${AUTOWARE_SYSROOT}/opt/ros/${ROS_DISTRO}" \
           -DCMAKE_FIND_ROOT_PATH=${{ github.workspace }}/install/ \
-          --packages-up-to autoware_build_flags; echo `ls`; echo `ls (pwd)/install`'
+          --packages-up-to amathutils_lib; echo `ls`; echo `ls $(pwd)/install`'
         pwd
         echo "--------------"
         ls
