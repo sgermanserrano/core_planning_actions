@@ -22,13 +22,13 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Push to mirror
-        run: |
-          git clone --mirror git@github.com:sgermanserrano/core_planning_actions.git
-          cd core_planning_actions.git
-          git remote set-url --push origin git@github.com:sgermanserrano/core_planning_mirror.git
-          git fetch -p origin
-          git push --mirror
+      #- name: Push to mirror
+    #    run: |
+    #      git clone --mirror git@github.com:sgermanserrano/core_planning_actions.git
+    #      cd core_planning_actions.git
+    #      git remote set-url --push origin git@github.com:sgermanserrano/core_planning_mirror.git
+    #      git fetch -p origin
+    #      git push --mirror
 
   build-melodic:
 
@@ -76,7 +76,7 @@ jobs:
           -DCMAKE_SYSTEM_PROCESSOR=$AUTOWARE_TARGET_ARCH \
           -DCMAKE_PREFIX_PATH="$(pwd)/install;$(pwd);${AUTOWARE_SYSROOT}/opt/ros/${ROS_DISTRO}" \
           -DCMAKE_FIND_ROOT_PATH=${{ github.workspace }}/install/ \
-          --packages-up-to amathutils_lib; echo `ls`; echo `ls $(pwd)/install`'
+          --packages-up-to autoware_messages; echo `ls`; echo `ls $(pwd)/install`'
         pwd
         echo "--------------"
         ls
