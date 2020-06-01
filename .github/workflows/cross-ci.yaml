@@ -30,16 +30,6 @@ jobs:
           git fetch -p origin
           git push --mirror
 
-
-
-      #- uses: wearerequired/git-mirror-action@v1
-      #  env:
-      #    SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      #  with:
-      #    source-repo: 'git@github.com:sgermanserrano/core_planning_actions.git'
-      #    destination-repo: 'git@github.com:sgermanserrano/core_planning_mirror.git'
-
-
   build-melodic:
 
     runs-on: ${{ matrix.os }}
@@ -72,24 +62,6 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v2
 
-    - name: Mirror repo
-      run: |
-        git clone --mirror https://github.com/sgermanserrano/core_planning_actions.git
-        echo askdjasd
-        cd core_planning_actions.git
-        ls
-        git remote set-url --push origin https://github.com/sgermanserrano/core_planning_mirror.git
-        echo ajshdasdj;
-        git fetch -p origin
-        echo ajsdjahf
-        git push --mirror
-        echo jeajhfabf
-
-    #- name: Setup ROS
-    #  uses: ros-tooling/setup-ros@0.0.18
-    #  with:
-    #    required-ros-distributions: melodic
-    #
     - name: Build repo
       run: |
         mkdir -p src_tmp/ && mv `find -maxdepth 1 -not -name . -not -name src_tmp -not -name $VCS_FILE` src_tmp/ && mv src_tmp/ src/
