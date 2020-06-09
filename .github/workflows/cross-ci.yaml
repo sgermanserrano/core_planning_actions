@@ -69,18 +69,10 @@ jobs:
         wget https://gitlab.com/autowarefoundation/autoware.ai/docker/raw/master/crossbuild/cross_toolchain.cmake
         vcs validate < $VCS_FILE
         vcs import src/ < $VCS_FILE
-        bash -c 'echo `pwd`; echo `ls`; source $AUTOWARE_SYSROOT/opt/ros/${ROS_DISTRO}/setup.bash; \
+        bash -c 'source $AUTOWARE_SYSROOT/opt/ros/${ROS_DISTRO}/setup.bash; \
         colcon build --merge-install \
           --cmake-args \
           -DCMAKE_TOOLCHAIN_FILE=$AUTOWARE_TOOLCHAIN_FILE_PATH \
           -DCMAKE_SYSTEM_PROCESSOR=$AUTOWARE_TARGET_ARCH \
           -DCMAKE_PREFIX_PATH="$(pwd)/install;${AUTOWARE_SYSROOT}/opt/ros/${ROS_DISTRO}" \
-          -DCMAKE_FIND_ROOT_PATH=$(pwd)/install/ \
-          --packages-up-to amathutils_lib; echo `ls`; echo `ls $(pwd)/install`'
-        pwd
-        echo "--------------"
-        ls
-        echo "--------------"
-        ls ${{ github.workspace }}
-        echo "--------------"
-        ls ${{ github.workspace }}/install/
+          -DCMAKE_FIND_ROOT_PATH=$(pwd)/install/;'
