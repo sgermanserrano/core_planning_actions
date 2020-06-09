@@ -66,12 +66,14 @@ jobs:
       run: |
         mkdir -p src_tmp/ && mv `find -maxdepth 1 -not -name . -not -name src_tmp -not -name $VCS_FILE` src_tmp/ && mv src_tmp/ src/
         sudo apt-get update -qq && sudo apt-get install -y python3-vcstool gcc git wget bash
+        echo $0
         bash
         wget https://gitlab.com/autowarefoundation/autoware.ai/docker/raw/master/crossbuild/cross_toolchain.cmake
         vcs validate < $VCS_FILE
         vcs import src/ < $VCS_FILE
-        echo `pwd` 
+        echo `pwd`
         echo `ls`
+        echo $0
         source $AUTOWARE_SYSROOT/opt/ros/${ROS_DISTRO}/setup.bash
         colcon build --merge-install \
           --cmake-args \
