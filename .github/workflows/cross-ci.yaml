@@ -65,23 +65,18 @@ jobs:
     - name: Build repo
       run: |
         mkdir -p src_tmp/ && mv `find -maxdepth 1 -not -name . -not -name src_tmp -not -name $VCS_FILE` src_tmp/ && mv src_tmp/ src/
-        sudo apt-get update -qq && sudo apt-get install -y python3-vcstool gcc git wget bash
-        echo $0
-        bash
+        sudo apt-get update -qq && sudo apt-get install -y python3-vcstool gcc git wget
         wget https://gitlab.com/autowarefoundation/autoware.ai/docker/raw/master/crossbuild/cross_toolchain.cmake
         vcs validate < $VCS_FILE
         vcs import src/ < $VCS_FILE
-        echo `pwd`
-        echo `ls`
-        echo $0
-        source $AUTOWARE_SYSROOT/opt/ros/${ROS_DISTRO}/setup.bash
+        bash -c 'echo `pwd`; echo `ls`; source $AUTOWARE_SYSROOT/opt/ros/${ROS_DISTRO}/setup.bash; \
         colcon build --merge-install \
           --cmake-args \
           -DCMAKE_TOOLCHAIN_FILE=$AUTOWARE_TOOLCHAIN_FILE_PATH \
           -DCMAKE_SYSTEM_PROCESSOR=$AUTOWARE_TARGET_ARCH \
-          -DCMAKE_PREFIX_PATH="$(pwd)/install;$(pwd);${AUTOWARE_SYSROOT}/opt/ros/${ROS_DISTRO}" \
-          -DCMAKE_FIND_ROOT_PATH=${{ github.workspace }}/install/ \
-          --packages-up-to autoware_messages; echo `ls`; echo `ls $(pwd)/install`
+          -DCMAKE_PREFIX_PATH="$(pwd)/install;${AUTOWARE_SYSROOT}/opt/ros/${ROS_DISTRO}" \
+          -DCMAKE_FIND_ROOT_PATH=$(pwd)/install/ \
+          --packages-up-to amathutils_lib; echo `ls`; echo `ls $(pwd)/install`'
         pwd
         echo "--------------"
         ls
