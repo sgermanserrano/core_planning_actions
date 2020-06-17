@@ -4,7 +4,7 @@ on:
   pull_request:
   push:
     branches:
-      - disabled
+      - master
     tags:
       - v*
 
@@ -39,7 +39,7 @@ jobs:
     #  with:
     #    required-ros-distributions: melodic
 
-    - name: Prepare repo 
+    - name: Prepare repo
       run: |
         mkdir -p src_tmp/ && mv `find -maxdepth 1 -not -name . -not -name src_tmp -not -name $VCS_FILE` src_tmp/ && mv src_tmp/ src/
         vcs validate < $VCS_FILE
