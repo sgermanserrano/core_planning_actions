@@ -23,7 +23,7 @@ jobs:
       ROS_DISTRO: melodic
 
     container:
-      image: autoware/autoware:bleedingedge-melodic-base
+      image: sgerman/autoware_github_actions:bleedingedge-melodic-base
       env:
         VCS_FILE: build_depends.repos
         ROS_DISTRO: melodic
@@ -31,7 +31,7 @@ jobs:
 
     steps:
 
-    if: matrix.os == 'ubuntu-latest' || matrix.os == 'self-hosted' && github.repository_owner == 'Autoware-AI'
+    if: matrix.os == 'ubuntu-latest' || matrix.os == 'self-hosted' && github.repository_owner == 'sgermanserrano'
 
     - name: Checkout repo
       uses: actions/checkout@v2
