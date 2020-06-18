@@ -35,11 +35,6 @@ jobs:
       if: (matrix.os == 'ubuntu-latest') || (matrix.os == 'self-hosted' && github.repository_owner == 'sgermanserrano')
       uses: actions/checkout@v2
 
-    #- name: Setup ROS
-    #  uses: ros-tooling/setup-ros@0.0.18
-    #  with:
-    #    required-ros-distributions: melodic
-
     - name: Prepare repo
       if: (matrix.os == 'ubuntu-latest') || (matrix.os == 'self-hosted' && github.repository_owner == 'sgermanserrano')
       run: |
