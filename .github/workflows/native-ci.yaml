@@ -31,7 +31,7 @@ jobs:
 
     steps:
 
-    if: matrix.os == 'ubuntu-latest' | matrix.os == 'self-hosted' && github.repository_owner == 'sgermanserrano'
+    if: (matrix.os == 'ubuntu-latest') || (matrix.os == 'self-hosted' && github.repository_owner == 'sgermanserrano')
 
     - name: Checkout repo
       uses: actions/checkout@v2
