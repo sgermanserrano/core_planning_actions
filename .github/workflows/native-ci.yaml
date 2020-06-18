@@ -27,16 +27,9 @@ jobs:
       env:
         VCS_FILE: build_depends.repos
         ROS_DISTRO: melodic
-      options: --user root --network bridge
+      options: --user autoware
 
     steps:
-
-    - name: Check
-      run: |
-        echo ${{ matrix.os }}
-        echo ${{ github.repository_owner }}
-        echo `matrix.os == 'self-hosted'`
-        echo `github.repository_owner== 'sgermanserrano'`
 
     - name: Checkout repo
       if: (matrix.os == 'ubuntu-latest') || (matrix.os == 'self-hosted' && github.repository_owner == 'sgermanserrano')
@@ -53,8 +46,7 @@ jobs:
         mkdir -p src_tmp/ && mv `find -maxdepth 1 -not -name . -not -name src_tmp -not -name $VCS_FILE` src_tmp/ && mv src_tmp/ src/
         vcs validate < $VCS_FILE
         vcs import src/ < $VCS_FILE
-        apt-get update -qqq
-        rosdep update
+        rosdep update && apt-get update -qqq
         rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO
         mkdir -p depends_ws/src
         mv src/depends depends_ws/src
