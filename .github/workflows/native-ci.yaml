@@ -29,9 +29,9 @@ jobs:
         ROS_DISTRO: melodic
       options: --user root
 
+    if: ${{ github.repository_owner }} == 'sgermanserrano'
+    
     steps:
-
-      if: ${{ github.repository_owner }} == 'sgermanserrano'
 
     - name: Checkout repo
       uses: actions/checkout@v2
