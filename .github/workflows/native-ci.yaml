@@ -32,7 +32,7 @@ jobs:
     steps:
 
     - name: Checkout repo
-      if: (${{ matrix.os }} == 'ubuntu-latest') || (${{ matrix.os }} == 'self-hosted' && ${{ github.repository_owner }} == 'sgermanserrano')
+      if: (${{ matrix.os }} == 'ubuntu-latest') || (${{ matrix.os }} == 'self-hosted' && ${{ github.repository_owner }} == 'Autoware-AI')
       uses: actions/checkout@v2
 
     #- name: Setup ROS
@@ -41,7 +41,7 @@ jobs:
     #    required-ros-distributions: melodic
 
     - name: Prepare repo
-      if: (${{ matrix.os }} == 'ubuntu-latest') || (${{ matrix.os }} == 'self-hosted' && ${{ github.repository_owner }} == 'sgermanserrano')
+      if: (${{ matrix.os }} == 'ubuntu-latest') || (${{ matrix.os }} == 'self-hosted' && ${{ github.repository_owner }} == 'Autoware-AI')
       run: |
         mkdir -p src_tmp/ && mv `find -maxdepth 1 -not -name . -not -name src_tmp -not -name $VCS_FILE` src_tmp/ && mv src_tmp/ src/
         vcs validate < $VCS_FILE
@@ -52,13 +52,13 @@ jobs:
         mv src/depends depends_ws/src
 
     - name: Build depends repos
-      if: (${{ matrix.os }} == 'ubuntu-latest') || (${{ matrix.os }} == 'self-hosted' && ${{ github.repository_owner }} == 'sgermanserrano')
+      if: (${{ matrix.os }} == 'ubuntu-latest') || (${{ matrix.os }} == 'self-hosted' && ${{ github.repository_owner }} == 'Autoware-AI')
       run: |
         bash -c 'source /opt/ros/$ROS_DISTRO/setup.bash; \
         cd depends_ws; colcon build; cd ..'
 
     - name: Build and test repo
-      if: (${{ matrix.os }} == 'ubuntu-latest') || (${{ matrix.os }} == 'self-hosted' && ${{ github.repository_owner }} == 'sgermanserrano')
+      if: (${{ matrix.os }} == 'ubuntu-latest') || (${{ matrix.os }} == 'self-hosted' && ${{ github.repository_owner }} == 'Autoware-AI')
       run: |
         bash -c 'source /opt/ros/$ROS_DISTRO/setup.bash; \
         source depends_ws/install/local_setup.bash; \
@@ -74,7 +74,7 @@ jobs:
         tar -czvf coverage.tar.gz coverage'
 
     - name: Upload Logs
-      if: (${{ matrix.os }} == 'ubuntu-latest') || (${{ matrix.os }} == 'self-hosted' && ${{ github.repository_owner }} == 'sgermanserrano')
+      if: (${{ matrix.os }} == 'ubuntu-latest') || (${{ matrix.os }} == 'self-hosted' && ${{ github.repository_owner }} == 'Autoware-AI')
       uses: actions/upload-artifact@v1
       with:
         name: coverage.tar.gz
