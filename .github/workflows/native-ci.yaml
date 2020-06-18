@@ -79,4 +79,3 @@ jobs:
       with:
         name: coverage.tar.gz
         path: coverage.tar.gz
-      if: always()
