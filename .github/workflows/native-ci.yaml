@@ -31,6 +31,8 @@ jobs:
 
     steps:
 
+    if: matrix.os == 'ubuntu-latest' || matrix.os == 'self-hosted' && github.repository_owner == 'Autoware-AI'
+
     - name: Checkout repo
       uses: actions/checkout@v2
 
