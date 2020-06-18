@@ -29,8 +29,8 @@ jobs:
         ROS_DISTRO: melodic
       options: --user root
 
-    if: ${{ github.repository_owner }} == 'sgermanserrano'
-    
+    if: ${{ matrix.os }} == 'ubuntu-latest' && ${{ github.repository_owner }} == 'sgermanserrano'
+
     steps:
 
     - name: Checkout repo
