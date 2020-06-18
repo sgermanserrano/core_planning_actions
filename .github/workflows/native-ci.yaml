@@ -31,6 +31,13 @@ jobs:
 
     steps:
 
+    - name: Check
+      run: |
+        echo ${{ matrix.os }}
+        echo ${{ github.repository_owner }}
+        echo `${{ matrix.os }} == 'self-hosted'`
+        echo `${{ github.repository_owner }} == 'Autoware-AI'`
+
     - name: Checkout repo
       if: (${{ matrix.os }} == 'ubuntu-latest') || (${{ matrix.os }} == 'self-hosted' && ${{ github.repository_owner }} == 'Autoware-AI')
       uses: actions/checkout@v2
