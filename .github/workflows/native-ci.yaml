@@ -1,4 +1,4 @@
-name: Native CI workflow
+name: Native CI workflow 
 
 on:
   pull_request:
