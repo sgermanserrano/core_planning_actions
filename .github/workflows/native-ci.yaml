@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, self-hosted, X64]
+        os: [X64]
       fail-fast: false
 
     env:
